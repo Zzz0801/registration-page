@@ -26,7 +26,6 @@ form.addEventListener("submit", function (e) {
   }
 });
 
-
 function checkRequired(inputArray) {
   let isValid = true;
 
@@ -40,13 +39,6 @@ function checkRequired(inputArray) {
     }
   });
   return isValid;
-}
-
-
-// Format field name with proper capitalization
-function formatFieldName(input) {
-  // input id: username -> Username
-  return input.id.charAt(0).toUpperCase() + input.id.slice(1);
 }
 
 function checkLength(input, min, max) {
@@ -67,14 +59,24 @@ function formatFieldName(input) {
   // input id: username -> Username
   return input.id.charAt(0).toUpperCase() + input.id.slice(1);
 }
+
+function checkEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (emailRegex.test(email.value.trim())) {
+    showSuccess(email);
+    return true;
+  } else {
+    showError(email, "Email is not valid");
+    return false;
+  }
+}
+
 function checkPasswordsMatch(input1, input2) {
   if (input1.value !== input2.value) {
     showError(input2, "Passwords do not match");
     return false;
-  } else {
-    showSuccess(input2);
-    return true;
   }
+  return true;
 }
 
 function showError(input, message) {
